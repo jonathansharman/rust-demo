@@ -1,7 +1,7 @@
 use image::Rgb;
 use num::{complex::Complex32, Zero};
 
-const COLORS: [Rgb<u8>; 13] = [
+const COLORS: &[Rgb<u8>] = &[
 	Rgb([0; 3]),
 	Rgb([0, 32, 64]),
 	Rgb([0, 64, 128]),
