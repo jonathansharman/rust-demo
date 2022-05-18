@@ -1,18 +1,22 @@
-use image::{ImageBuffer, Rgb, RgbImage};
+mod mandelbrot;
 
-const WIDTH: u32 = 100;
-const HEIGHT: u32 = 100;
-const FILENAME: &str = "out/stripes.png";
+use image::{ImageBuffer, RgbImage};
+use num::complex::Complex32;
+
+const RES: (u32, u32) = (500, 500);
+const FILENAME: &str = "out/m-set.png";
 
 fn main() {
-	let mut image: RgbImage = ImageBuffer::new(WIDTH, HEIGHT);
-	for x in 0..WIDTH {
-		for y in 0..HEIGHT {
-			let pixel = if (x + y) / 10 % 2 == 0 {
-				Rgb([0, 0, 0])
-			} else {
-				Rgb([255, 255, 255])
-			};
+	let m = mandelbrot::MandelbrotView {
+		res: RES,
+		max_iters: 50,
+		c_min: Complex32::new(-2.5, -1.75),
+		c_max: Complex32::new(1.0, 1.75),
+	};
+	let mut image: RgbImage = ImageBuffer::new(RES.0, RES.1);
+	for x in 0..RES.0 {
+		for y in 0..RES.1 {
+			let pixel = m.pixel(x, y);
 			image.put_pixel(x, y, pixel);
 		}
 	}
