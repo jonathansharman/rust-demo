@@ -3,13 +3,14 @@ mod mandelbrot;
 use image::{ImageBuffer, RgbImage};
 use num::complex::Complex32;
 
-const RES: (u32, u32) = (500, 500);
+const RES: (u32, u32) = (5000, 5000);
 const FILENAME: &str = "out/m-set.png";
 
 fn main() {
+	let start = std::time::Instant::now();
 	let mandelbrot_view = mandelbrot::MandelbrotView {
 		res: RES,
-		max_iters: 50,
+		max_iters: 500,
 		c_min: Complex32::new(-2.5, -1.75),
 		c_max: Complex32::new(1.0, 1.75),
 	};
@@ -24,4 +25,6 @@ fn main() {
 		Ok(_) => println!("Saved image to {FILENAME}"),
 		Err(err) => println!("Error saving image to {FILENAME}: {err}"),
 	}
+	let elapsed = start.elapsed().as_millis();
+	println!("Run time: {elapsed} ms")
 }
