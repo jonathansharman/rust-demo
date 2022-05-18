@@ -7,7 +7,7 @@ const RES: (u32, u32) = (500, 500);
 const FILENAME: &str = "out/m-set.png";
 
 fn main() {
-	let m = mandelbrot::MandelbrotView {
+	let mandelbrot_view = mandelbrot::MandelbrotView {
 		res: RES,
 		max_iters: 50,
 		c_min: Complex32::new(-2.5, -1.75),
@@ -16,7 +16,7 @@ fn main() {
 	let mut image: RgbImage = ImageBuffer::new(RES.0, RES.1);
 	for x in 0..RES.0 {
 		for y in 0..RES.1 {
-			let pixel = m.pixel(x, y);
+			let pixel = mandelbrot_view.pixel(x, y);
 			image.put_pixel(x, y, pixel);
 		}
 	}
