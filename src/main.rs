@@ -32,10 +32,15 @@ fn main() {
 	for thread in threads {
 		thread.join();
 	}
+
+	let elapsed_generate = start.elapsed().as_millis();
+	println!("M-set generation time: {elapsed_generate} ms");
+
 	match image.save(FILENAME) {
 		Ok(_) => println!("Saved image to {FILENAME}"),
 		Err(err) => println!("Error saving image to {FILENAME}: {err}"),
 	}
-	let elapsed = start.elapsed().as_millis();
-	println!("Run time: {elapsed} ms")
+
+	let elapsed_total = start.elapsed().as_millis();
+	println!("Total run time: {elapsed_total} ms");
 }
